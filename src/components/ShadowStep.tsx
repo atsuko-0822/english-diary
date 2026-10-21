@@ -59,7 +59,7 @@ export function ShadowStep({
             className="rounded-lg bg-emerald-700 px-5 py-2 text-white"
             onClick={onNext}
           >
-            音読チェックへ
+            英語で言うステップへ
           </button>
         )}
       </div>
