@@ -9,8 +9,9 @@ Rules:
 - Prefer words a high-school student knows; keep sentences short enough to say in one breath.
 - If the writer used Japanese words, translate them into natural English.
 - Give the reason for each change in short, plain Japanese (one sentence). If a sentence needed no change, reason is "".
+- Give a natural Japanese translation of each corrected sentence in "japanese". The learner will see only this and say the English from memory, so keep it close to the English meaning.
 Reply with JSON only, in this shape:
-{"sentences":[{"original":"...","corrected":"...","reason":"..."}]}`;
+{"sentences":[{"original":"...","corrected":"...","reason":"...","japanese":"..."}]}`;
 
 export async function POST(request: Request) {
   const { text } = (await request.json()) as { text?: string };
@@ -31,6 +32,7 @@ export async function POST(request: Request) {
       original: s,
       corrected: s,
       reason: "",
+      japanese: "",
     }));
     return NextResponse.json({ sentences, mock: true } satisfies CorrectionResult);
   }

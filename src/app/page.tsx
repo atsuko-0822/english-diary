@@ -13,13 +13,14 @@ const STEP_LABELS: { step: Step; label: string }[] = [
   { step: "write", label: "書く" },
   { step: "correction", label: "添削" },
   { step: "shadow", label: "シャドーイング" },
-  { step: "read", label: "音読チェック" },
+  { step: "read", label: "英語で言う" },
 ];
 
 export default function Home() {
   const [step, setStep] = useState<Step>("write");
   const [correction, setCorrection] = useState<CorrectionResult | null>(null);
   const sentences = correction?.sentences.map((s) => s.corrected) ?? [];
+  const japanese = correction?.sentences.map((s) => s.japanese) ?? [];
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-8 space-y-6">
@@ -50,7 +51,7 @@ export default function Home() {
         <ShadowStep sentences={sentences} onNext={() => setStep("read")} />
       )}
       {step === "read" && (
-        <ReadStep sentences={sentences} onFinish={() => setStep("done")} />
+        <ReadStep sentences={sentences} japanese={japanese} onFinish={() => setStep("done")} />
       )}
       {step === "done" && (
         <section className="space-y-4">
